@@ -1,5 +1,7 @@
 import streamlit as st
+import home_page
 from streamlit_option_menu import option_menu
+
 
 selected_option = option_menu(
     menu_title = None,
@@ -12,6 +14,7 @@ selected_option = option_menu(
 
 if selected_option == "Home":
     st.title("Welcome to Home Page")
+    home_page.main()
 
 elif selected_option == "Statitstic":
     st.title("Welcome to Statitstic Page")
