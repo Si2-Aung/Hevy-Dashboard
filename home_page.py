@@ -1,30 +1,26 @@
 import streamlit as st
 import pandas as pd
-import data_cleaning as dc
+import training_metrics
 import streamlit_shadcn_ui as ui
 
 
 def main(workout_data):
     st.title("Overview")
-    total_workouts = calculate_total_workouts(workout_data)
-    average_duration = calculate_average_duration(workout_data)
-    cols = st.columns(3)
+    create_metrics(workout_data)
+    
+def create_metrics(workout_data):
+    total_workouts = training_metrics.calculate_total_workouts(workout_data)
+    average_duration = training_metrics.calculate_average_duration(workout_data)
+    prepared_df = training_metrics.prepare_df_for_streakcalculation(workout_data)
+    longest_streak = training_metrics.calculate_longest_streak(prepared_df)
+    most_trained = training_metrics.calculate_weekly_streak(prepared_df)
+    cols = st.columns(4)
     with cols[0]:
         ui.metric_card(title="Total Workouts", content=total_workouts, key="card1")
     with cols[1]:
         ui.metric_card(title="Average Workout Time", content=average_duration, key="card2")
     with cols[2]:
-        ui.metric_card(title="Longest Streak in weeks", content="longest_streak", key="card3")
-    return 
-    
-# Function to calculate total workouts
-def calculate_total_workouts(workout_data: pd.DataFrame) -> str:
-    return str(workout_data['start_time'].nunique())
-
-# Function to calculate average workout duration
-def calculate_average_duration(workout_data: pd.DataFrame) -> str:
-    copied_workout_data = workout_data.copy()
-    filtered_workout_data = copied_workout_data.drop_duplicates(subset=['start_time'])
-    list_of_duration_minutes = (filtered_workout_data['end_time'] - filtered_workout_data['start_time']).dt.total_seconds() / 60
-    average_duration = list_of_duration_minutes.mean()
-    return f"{round(average_duration)} min"
+        ui.metric_card(title="Longest Streak in weeks", content=longest_streak, key="card3")
+    with cols[3]:
+        ui.metric_card(title="Most trained in a week", content=most_trained, key="card4")
+    return
