@@ -9,7 +9,8 @@ def prepare_dataframe(workout_data):
 # Function to calculate the month with the most workouts
 def find_month_with_most_workouts(workout_time):
     grouped_workouts_per_month = workout_time.groupby('workout_month').size()
-    return grouped_workouts_per_month.idxmax()
+    most_trained_month = grouped_workouts_per_month.idxmax()
+    return most_trained_month.month
 
 # Function to get training days in the month with the most workouts
 def get_training_days_of_month(workout_time, month):
@@ -18,7 +19,7 @@ def get_training_days_of_month(workout_time, month):
     return training_days
 
 # Function to create a calendar for a specific month and year
-def create_calendar(year, month, training_days):
+def build_calendar(year, month, training_days):
     cal = calendar.monthcalendar(year, month)
     month_name = calendar.month_name[month]
     days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
