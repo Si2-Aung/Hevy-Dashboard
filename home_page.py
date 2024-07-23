@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import training_metrics
 import streamlit_shadcn_ui as ui
 
@@ -11,7 +10,7 @@ def main(workout_data):
 def create_metrics(workout_data):
     total_workouts = training_metrics.calculate_total_workouts(workout_data)
     average_duration = training_metrics.calculate_average_duration(workout_data)
-    prepared_df = training_metrics.prepare_df_for_streakcalculation(workout_data)
+    prepared_df = training_metrics.prepare_df_for_streak_calculation(workout_data)
     longest_streak = training_metrics.calculate_longest_streak(prepared_df)
     most_trained = training_metrics.calculate_weekly_streak(prepared_df)
     cols = st.columns(4)

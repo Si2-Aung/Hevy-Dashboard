@@ -8,31 +8,32 @@ def calculate_total_workouts(workout_data: pd.DataFrame) -> str:
 def calculate_average_duration(workout_data: pd.DataFrame) -> str:
     copied_workout_data = workout_data[['start_time', 'end_time']]
     filtered_workout_data = copied_workout_data.drop_duplicates(subset=['start_time'])
-    list_of_duration_minutes = (filtered_workout_data['end_time'] - filtered_workout_data['start_time']).dt.total_seconds() / 60
-    average_duration = list_of_duration_minutes.mean()
+    list_of_duration = (filtered_workout_data['end_time'] - filtered_workout_data['start_time']).dt.total_seconds() / 60
+    average_duration = list_of_duration.mean()
     return f"{round(average_duration)} min"
 
 # Function to prepare the dataframes for calculating the longest streak
-def prepare_df_for_streakcalculation(workout_data: pd.DataFrame) -> pd.DataFrame:
-    copied_workout_data = workout_data[["start_time"]].drop_duplicates()
-    copied_workout_data['start_time'] = pd.to_datetime(copied_workout_data['start_time'])
-    copied_workout_data['year'] = copied_workout_data['start_time'].dt.isocalendar().year
-    copied_workout_data['week'] = copied_workout_data['start_time'].dt.isocalendar().week
+def prepare_df_for_streak_calculation(workout_data: pd.DataFrame) -> pd.DataFrame:
+    workout_times  = workout_data[["start_time"]].drop_duplicates()
+    workout_times['start_time'] = pd.to_datetime(workout_times ['start_time'])
+    workout_times['year'] = workout_times['start_time'].dt.isocalendar().year
+    workout_times['week'] = workout_times['start_time'].dt.isocalendar().week
     
     # Group by year and week and count the occurrences in each week
-    prepared_df = copied_workout_data.groupby(['year', 'week']).size().reset_index(name='count')
-    return prepared_df
+    weekly_workouts = workout_times.groupby(['year', 'week']).size().reset_index(name='count')
+    return weekly_workouts
 
 # Function to calculate the longest streak counted in weeks
-def calculate_longest_streak(prepared_df: pd.DataFrame) -> int:
+def calculate_longest_streak(prepared_df: pd.DataFrame) -> str:
     max_streak = 0
     current_streak = 0
     previous_week = None
     
     for _, row in prepared_df.iterrows():
         year, week = row['year'], row['week']
-        if previous_week is None or (year == previous_week[0] and week == previous_week[1] + 1) or \
-           (year == previous_week[0] + 1 and week == 1 and previous_week[1] == 52):
+        if (previous_week is None or 
+            (year == previous_week[0] and week == previous_week[1] + 1) or 
+            (year == previous_week[0] + 1 and week == 1 and previous_week[1] == 52)):
             current_streak += 1
         else:
             current_streak = 1
