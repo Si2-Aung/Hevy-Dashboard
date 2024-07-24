@@ -2,7 +2,7 @@ import pandas as pd
 import calendar
 
 def prepare_dataframe(workout_data):
-    workout_time = workout_data[['start_time']]
+    workout_time = workout_data[['start_time']].copy()
     workout_time['workout_month'] = workout_time['start_time'].dt.to_period('M')
     return workout_time
 
@@ -10,7 +10,7 @@ def prepare_dataframe(workout_data):
 def find_month_with_most_workouts(workout_time):
     grouped_workouts_per_month = workout_time.groupby('workout_month').size()
     most_trained_month = grouped_workouts_per_month.idxmax()
-    return most_trained_month.month
+    return most_trained_month
 
 # Function to get training days in the month with the most workouts
 def get_training_days_of_month(workout_time, month):
