@@ -2,13 +2,11 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import json
+from excercises import EXERCISE_MAPPING
 
-def process_json_file():
-    with open('exercises_map.json', 'r') as file:
-        excercise_category = json.load(file)
+def process_file():
     # Reverse the mapping for easier lookup
-    reverse_exercise_category = {exercise: category for category, exercises in excercise_category.items() for exercise in exercises}
+    reverse_exercise_category = {exercise: category for category, exercises in EXERCISE_MAPPING.items() for exercise in exercises}
     return reverse_exercise_category
 
 def calculate_stats_for_chart(workout_data: pd.DataFrame,excercise_category: dict):
@@ -18,7 +16,7 @@ def calculate_stats_for_chart(workout_data: pd.DataFrame,excercise_category: dic
     # Map exercises to categories
     workout_data.loc[:, 'category'] = workout_data['exercise_title'].map(excercise_category)
     # Aggregate the count of unique exercises per category
-    category_summary = workout_data['category'].value_counts().reindex(excercise_category.keys(), fill_value=0)
+    category_summary = workout_data['category'].value_counts().reindex(EXERCISE_MAPPING.keys(), fill_value=0)
     return category_summary
 
 def create_radar_chart(stats):
@@ -35,7 +33,7 @@ def create_radar_chart(stats):
     fig, ax = plt.subplots(figsize=(4, 4), subplot_kw=dict(polar=True))
     
     # Füllfarbe auf kräftiges Dunkelblau setzen
-    ax.fill(angles, stats, alpha=0.7, color="#85d7d3", edgecolor='#234123', linewidth=2)
+    ax.fill(angles, stats, alpha=0.4, color="#85d7d3", edgecolor='#234123', linewidth=2)
 
     # Schönheitsverbesserungen
     ax.set_yticklabels([])  # Remove radial labels

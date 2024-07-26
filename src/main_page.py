@@ -10,23 +10,8 @@ def main():
         how_to_upload()
     else:
         dc.clean(workout_data)
-        selected_option = option_menu(
-            menu_title=None,
-            options=["Home", "Statistic", "Contact"],
-            icons=["house", "book", "phone"],
-            menu_icon="th-large", default_index=0, orientation="horizontal"
-        )
-
-        if selected_option == "Home":
-            home_page.main(workout_data)
-
-        elif selected_option == "Statistic":
-            st.title("Welcome to Statistic Page")
-
-        elif selected_option == "Contact":
-            st.title("Welcome to Contact Page")
-
-
+        create_selection_bar(workout_data)
+    
 def get_csv_file():
     if 'uploaded_data' not in st.session_state:
         csv_file = st.file_uploader(" ", type="csv", label_visibility="collapsed")
@@ -51,5 +36,21 @@ def how_to_upload():
     **4.** **Enjoy the app** 🎉
     """)
 
+def create_selection_bar(workout_data):
+    selected_option = option_menu(
+            menu_title=None,
+            options=["Home", "Statistic", "Contact"],
+            icons=["house", "book", "phone"],
+            menu_icon="th-large", default_index=0, orientation="horizontal"
+        )
+    if selected_option == "Home":
+        home_page.main(workout_data)
+
+    elif selected_option == "Statistic":
+        st.title("Welcome to Statistic Page")
+
+    elif selected_option == "Contact":
+        st.title("Welcome to Contact Page")
+    return
 
 main()

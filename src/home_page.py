@@ -7,8 +7,12 @@ import radar_chart
 def main(workout_data):
     st.title("Overview")
     create_metrics(workout_data)
-    create_calender(workout_data)
-    create_radar_chart(workout_data)
+
+    cols = st.columns(2)
+    with cols[0]:
+        create_calender(workout_data)
+    with cols[1]:
+        create_radar_chart(workout_data)
     
 
 def create_metrics(workout_data):
@@ -48,11 +52,11 @@ def create_calender(workout_data):
     return
 
 def create_radar_chart(workout_data):
-    excercise_category = radar_chart.process_json_file()
+    excercise_category = radar_chart.process_file()
 
     chart_stats = radar_chart.calculate_stats_for_chart(workout_data,excercise_category)
 
-    fig = radar_chart.create_radar_chart(chart_stats)
+    chart = radar_chart.create_radar_chart(chart_stats)
     
-    st.pyplot(fig)
+    st.pyplot(chart)
     return
