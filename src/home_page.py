@@ -2,11 +2,14 @@ import streamlit as st
 import streamlit_shadcn_ui as ui
 import training_metrics
 import calender_calculator
+import radar_chart
 
 def main(workout_data):
     st.title("Overview")
     create_metrics(workout_data)
     create_calender(workout_data)
+    create_radar_chart(workout_data)
+    
 
 def create_metrics(workout_data):
     total_workouts = training_metrics.calculate_total_workouts(workout_data)
@@ -42,4 +45,14 @@ def create_calender(workout_data):
     calender = calender_calculator.build_calendar(most_workouts_year, most_workouts_month.month, training_days)
 
     st.markdown(calender, unsafe_allow_html=True)
+    return
+
+def create_radar_chart(workout_data):
+    excercise_category = radar_chart.process_json_file()
+
+    chart_stats = radar_chart.calculate_stats_for_chart(workout_data,excercise_category)
+
+    fig = radar_chart.create_radar_chart(chart_stats)
+    
+    st.pyplot(fig)
     return

@@ -2,10 +2,29 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import json
 
-def create_radar_chart(labels, stats):
+def process_json_file():
+    with open('exercises_map.json', 'r') as file:
+        excercise_category = json.load(file)
+    # Reverse the mapping for easier lookup
+    reverse_exercise_category = {exercise: category for category, exercises in excercise_category.items() for exercise in exercises}
+    return reverse_exercise_category
+
+def calculate_stats_for_chart(workout_data: pd.DataFrame,excercise_category: dict):
+    workout_data['date'] = workout_data['start_time'].dt.date
+    # Deduplicate the exercises per day to ensure each exercise is only counted once per day
+    workout_data = workout_data.drop_duplicates(subset=['date', 'exercise_title']).copy()
+    # Map exercises to categories
+    workout_data.loc[:, 'category'] = workout_data['exercise_title'].map(excercise_category)
+    # Aggregate the count of unique exercises per category
+    category_summary = workout_data['category'].value_counts().reindex(excercise_category.keys(), fill_value=0)
+    return category_summary
+
+def create_radar_chart(stats):
+    labels = create_labels()
+
     num_vars = len(labels)
-
     # Winkel für die Diagrammberechnung
     angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
 
@@ -34,11 +53,7 @@ def create_radar_chart(labels, stats):
 
     return fig
 
-def main(workout_data: pd.DataFrame):
-    # Daten für das Diagramm
-    labels = np.array(['Core', 'Beine', 'Arme', 'Rücken', 'Cardio', 'Brust', "Schultern"])
-    """stats = Exercises.calculate_stats(workout_data)"""
-    # Streamlit App
-    fig = create_radar_chart(labels, stats)
-    st.pyplot(fig)
+def create_labels():
+    return ['Core', 'Leg', 'Arms', 'Back', 'Cardio', 'Chest', "Shoulders"]
+
 
