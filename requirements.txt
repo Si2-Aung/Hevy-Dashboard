@@ -1,0 +1,11 @@
+pandas
+streamlit_shadcn_ui
+streamlit
+matplotlib.pyplot
+calendar
+data_cleaning
+numpy
+streamlit_option_menu
+calender_calculator
+home_page
+training_metrics
