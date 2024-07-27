@@ -3,16 +3,18 @@ import streamlit_shadcn_ui as ui
 import training_metrics
 import calender_calculator
 import radar_chart
+import slider
 
 def main(workout_data):
     st.title("Overview")
-    create_metrics(workout_data)
+    limited_workout_data = limit_dataset(workout_data)
+    create_metrics(limited_workout_data)
 
     cols = st.columns(2)
     with cols[0]:
         create_calender(workout_data)
     with cols[1]:
-        create_radar_chart(workout_data)
+        create_radar_chart(limited_workout_data)
     
 
 def create_metrics(workout_data):
@@ -42,9 +44,9 @@ def create_calender(workout_data):
 
     most_workouts_month = calender_calculator.find_month_with_most_workouts(prepared_dataframe)
 
-    most_workouts_year = most_workouts_month.year
-
     training_days = calender_calculator.get_training_days_of_month(prepared_dataframe, most_workouts_month)
+
+    most_workouts_year = most_workouts_month.year
 
     calender = calender_calculator.build_calendar(most_workouts_year, most_workouts_month.month, training_days)
 
@@ -60,3 +62,10 @@ def create_radar_chart(workout_data):
     
     st.pyplot(chart)
     return
+
+def limit_dataset(workout_data):
+    max_months_available = (workout_data['start_time'].max() - workout_data['start_time'].min()).days // 30
+    limit_value= slider.get_limitation_value(max_months_available)
+    flitered_workout_data = slider.filter_data_by_limitation_value(workout_data, limit_value)
+
+    return flitered_workout_data
