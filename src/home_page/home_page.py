@@ -66,6 +66,6 @@ def create_radar_chart(workout_data):
 def limit_dataset(workout_data):
     max_months_available = (workout_data['start_time'].max() - workout_data['start_time'].min()).days // 30
     limit_value= slider.get_limitation_value(max_months_available)
-    flitered_workout_data = slider.filter_data_by_limitation_value(workout_data, limit_value)
+    limited_workout_data = slider.filter_data_by_limitation_value(workout_data, limit_value)
 
-    return flitered_workout_data
+    return limited_workout_data
