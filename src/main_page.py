@@ -1,15 +1,15 @@
 import streamlit as st
 import pandas as pd
-import home_page
-from streamlit_option_menu import option_menu
-import data_cleaning as dc
+import Homepage.data_cleaning as data_cleaning
+import Homepage.home_page as home_page
+from streamlit_option_menu import option_menu 
 
 def main():
     workout_data = get_csv_file()
     if workout_data is None:    
         how_to_upload()
     else:
-        dc.clean(workout_data)
+        data_cleaning.clean(workout_data)
         create_selection_bar(workout_data)
     
 def get_csv_file():

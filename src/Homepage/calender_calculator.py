@@ -28,7 +28,7 @@ def build_calendar(year, month, training_days):
     header = f"""
     <table style='border-collapse: collapse; width: 50%; background-color: white; color: black;'>
         <tr>
-            <th colspan='7' style='text-align: center; font-size: 24px; background-color: lightgray; border: 1px solid black;'>{month_name} {year}</th>
+            <th colspan='7' style='text-align: center; font-size: 24px; background-color: lightgrey; border: 1px solid black;'>{month_name} {year}</th>
         </tr>
         <tr>
             {" ".join(f"<th style='border: 1px solid black; padding: 5px; background-color: white;'>{day}</th>" for day in days)}
@@ -42,7 +42,7 @@ def build_calendar(year, month, training_days):
             if day == 0:
                 row += "<td style='border: 1px solid black; padding: 10px; background-color: #white;'></td>"
             elif day in training_days:
-                row += f"<td style='border: 1px solid black; padding: 10px; background-color: lightblue; color: black;'>{day}</td>"
+                row += f"<td style='border: 1px solid black; padding: 10px; background-color: #FFB6C1; color: black;'>{day}</td>"
             else:
                 row += f"<td style='border: 1px solid black; padding: 10px; background-color: #white; color: black;'>{day}</td>"
         row += "</tr>"

@@ -1,8 +1,7 @@
-import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from excercises import EXERCISE_MAPPING
+from Homepage.excercises import EXERCISE_MAPPING
 
 def process_file():
     # Reverse the mapping for easier lookup
@@ -11,7 +10,6 @@ def process_file():
 
 def calculate_stats_for_chart(workout_data: pd.DataFrame,excercise_category: dict):
     workout_data['date'] = workout_data['start_time'].dt.date
-    # Deduplicate the exercises per day to ensure each exercise is only counted once per day
     workout_data = workout_data.drop_duplicates(subset=['date', 'exercise_title']).copy()
     # Map exercises to categories
     workout_data.loc[:, 'category'] = workout_data['exercise_title'].map(excercise_category)
@@ -33,7 +31,7 @@ def create_radar_chart(stats):
     fig, ax = plt.subplots(figsize=(4, 4), subplot_kw=dict(polar=True))
     
     # Füllfarbe auf kräftiges Dunkelblau setzen
-    ax.fill(angles, stats, alpha=1, color="#85d7d3", edgecolor='#234123', linewidth=2)
+    ax.fill(angles, stats, alpha=1, color="#E0FFFF", edgecolor='#234123', linewidth=1)
 
     # Schönheitsverbesserungen
     ax.set_yticklabels([])  # Remove radial labels
@@ -47,7 +45,7 @@ def create_radar_chart(stats):
     ax.spines['polar'].set_visible(False)
 
     # Ändern der Farbe der äußeren Linien zu einer helleren Farbe
-    ax.xaxis.grid(True, color='darkgrey', linestyle=':', linewidth=1.5)
+    ax.xaxis.grid(True, color='black', linestyle='--', linewidth=1.5)
 
     return fig
 

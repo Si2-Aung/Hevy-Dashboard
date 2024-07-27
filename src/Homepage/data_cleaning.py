@@ -3,9 +3,10 @@ import pandas as pd
 def clean(workoutdata):
     if not isinstance(workoutdata, pd.DataFrame):
         raise ValueError("Input data must be a pandas DataFrame")
-    
+
     remove_unnecessary_columns(workoutdata)
     convert_data_types(workoutdata)
+    
     return workoutdata
 
 def remove_unnecessary_columns(workoutdata):
