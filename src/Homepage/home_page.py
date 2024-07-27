@@ -1,10 +1,9 @@
 import streamlit as st
-import streamlit_shadcn_ui as ui
 import Homepage.training_metrics as training_metrics
 import Homepage.calender_calculator as calender_calculator
 import Homepage.radar_chart as radar_chart
 import Homepage.slider as slider
-
+from streamlit_extras.metric_cards import style_metric_cards
 def main(workout_data):
     st.title("Overview")
 
@@ -30,15 +29,16 @@ def create_metrics(workout_data):
 
     most_trained = training_metrics.calculate_weekly_streak(prepared_df)
 
-    cols = st.columns(4)
-    with cols[0]:
-        ui.metric_card(title="Total Workout done", content=total_workouts, key="card1")
-    with cols[1]:
-        ui.metric_card(title="⌀ Workout Time", content=average_duration, key="card2")
-    with cols[2]:
-        ui.metric_card(title="Longest Streak in weeks", content=longest_streak, key="card3")
-    with cols[3]:
-        ui.metric_card(title="Most trained in a week", content=most_trained, key="card4")
+    colss = st.columns(4)
+    with colss[0]:
+        st.metric(label="Total Workout done", value=total_workouts)
+    with colss[1]:
+        st.metric(label="⌀ Workout Time", value=average_duration)
+    with colss[2]:
+        st.metric(label="Longest Streak", value=longest_streak)
+    with colss[3]:
+        st.metric(label="Most trained in a week", value=most_trained)
+    style_metric_cards("white", 1, "#CCCCCC", 10, "#FF6347",True)
     return
 
 def create_calender(workout_data):

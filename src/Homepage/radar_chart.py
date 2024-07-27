@@ -9,7 +9,7 @@ def process_file():
     return reverse_exercise_category
 
 def calculate_stats_for_chart(workout_data: pd.DataFrame,excercise_category: dict):
-    workout_data['date'] = workout_data['start_time'].dt.date
+    workout_data.loc[:,'date'] = workout_data['start_time'].dt.date
     workout_data = workout_data.drop_duplicates(subset=['date', 'exercise_title']).copy()
     # Map exercises to categories
     workout_data.loc[:, 'category'] = workout_data['exercise_title'].map(excercise_category)
@@ -31,7 +31,7 @@ def create_radar_chart(stats):
     fig, ax = plt.subplots(figsize=(4, 4), subplot_kw=dict(polar=True))
     
     # Füllfarbe auf kräftiges Dunkelblau setzen
-    ax.fill(angles, stats, alpha=1, color="#E0FFFF", edgecolor='#234123', linewidth=1)
+    ax.fill(angles, stats, alpha=1, color="#E0FFFF", edgecolor="#2596be", linewidth=1.5)
 
     # Schönheitsverbesserungen
     ax.set_yticklabels([])  # Remove radial labels

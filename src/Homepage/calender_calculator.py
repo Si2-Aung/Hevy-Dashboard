@@ -28,7 +28,7 @@ def build_calendar(year, month, training_days):
     header = f"""
     <table style='border-collapse: collapse; width: 50%; background-color: white; color: black;'>
         <tr>
-            <th colspan='7' style='text-align: center; font-size: 24px; background-color: lightgrey; border: 1px solid black;'>{month_name} {year}</th>
+            <th colspan='7' style='text-align: center; font-size: 24px; background-color: #f0f2f6; border: 1px solid black;'>{month_name} {year}</th>
         </tr>
         <tr>
             {" ".join(f"<th style='border: 1px solid black; padding: 5px; background-color: white;'>{day}</th>" for day in days)}
