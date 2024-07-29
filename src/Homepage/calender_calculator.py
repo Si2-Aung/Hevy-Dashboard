@@ -1,4 +1,5 @@
-import pandas as pd
+import bleach
+from bleach.css_sanitizer import CSSSanitizer
 import calendar
 
 def prepare_dataframe(workout_data):
@@ -26,12 +27,12 @@ def build_calendar(year, month, training_days):
     
     # Create table header
     header = f"""
-    <table style='border-collapse: collapse; width: 50%; background-color: white; color: black;'>
+    <table style='border-collapse: collapse; width: 90%; background-color: #FFFFFF; color: black; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);'>
         <tr>
-            <th colspan='7' style='text-align: center; font-size: 24px; background-color: #f0f2f6; border: 1px solid black;'>{month_name} {year}</th>
+            <th colspan='7' style='text-align: center; font-size: 24px; background-color: #f0f2f6; color: black; padding: 10px 0;'>{month_name} {year}</th>
         </tr>
         <tr>
-            {" ".join(f"<th style='border: 1px solid black; padding: 5px; background-color: white;'>{day}</th>" for day in days)}
+            {" ".join(f"<th style='padding: 10px; background-color: #f0f2f6; color: black;'>{day}</th>" for day in days)}
         </tr>
     """
     # Create table rows
@@ -40,14 +41,39 @@ def build_calendar(year, month, training_days):
         row = "<tr>"
         for day in week:
             if day == 0:
-                row += "<td style='border: 1px solid black; padding: 10px; background-color: #white;'></td>"
+                row += "<td style= padding: 10px; background-color: #white; text-align: center;'></td>"
             elif day in training_days:
-                row += f"<td style='border: 1px solid black; padding: 10px; background-color: #FFB6C1; color: black;'>{day}</td>"
+                row += f"<td style=' padding: 10px; background-color: #FFB6C1; color: black; text-align: center;'>{day}</td>"
             else:
-                row += f"<td style='border: 1px solid black; padding: 10px; background-color: #white; color: black;'>{day}</td>"
+                row += f"<td style=' padding: 10px; background-color: #white; color: black;text-align: center;'>{day}</td>"
         row += "</tr>"
         rows += row
     
     # Combine header and rows
     table = header + rows + "</table>"
-    return table
+    secured_table = secure_HTML(table)
+    return secured_table
+    
+def secure_HTML(table):
+    tags=['table', 'tr', 'th', 'td']
+    css_sanitizer = CSSSanitizer(allowed_css_properties=[
+            'border-collapse', 'width', 'background-color', 'color', 'border-radius', 
+            'box-shadow', 'padding', 'text-align', 'font-size', 'border-top-left-radius', 
+            'border-top-right-radius'
+    ])
+    attributes={
+        'table': ['style'],
+        'tr': ['style'],
+        'th': ['style', 'colspan'],
+        'td': ['style']
+    }
+    secured_table = bleach.clean(
+        table, 
+        tags=tags,
+        attributes=attributes,
+        css_sanitizer=css_sanitizer,
+        strip=True
+    )
+    return secured_table
+
+

@@ -4,17 +4,18 @@ import Homepage.calender_calculator as calender_calculator
 import Homepage.radar_chart as radar_chart
 import Homepage.slider as slider
 from streamlit_extras.metric_cards import style_metric_cards
+import datetime
 def main(workout_data):
     st.title("Overview")
-
     limited_workout_data = limit_dataset(workout_data)
-    
     create_metrics(limited_workout_data)
 
     cols = st.columns(2)
     with cols[0]:
+        st.subheader("Most tryhard month")
         create_calender(workout_data)
     with cols[1]:
+        st.subheader("Focused muscle groups")
         create_radar_chart(limited_workout_data)
     
 
