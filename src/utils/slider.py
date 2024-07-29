@@ -1,5 +1,12 @@
 import streamlit as st
 import pandas as pd
+
+def limit_dataset(workout_data):
+    max_months_available = (workout_data['start_time'].max() - workout_data['start_time'].min()).days // 30
+    limit_value= get_limitation_value(max_months_available)
+    limited_workout_data = filter_data_by_limitation_value(workout_data, limit_value)
+    return limited_workout_data
+
 def filter_data_by_limitation_value(workout_data, limitation_value):
     if limitation_value == 0:
         return workout_data

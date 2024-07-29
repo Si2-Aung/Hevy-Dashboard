@@ -1,13 +1,13 @@
 import streamlit as st
-import Homepage.training_metrics as training_metrics
-import Homepage.calender_calculator as calender_calculator
-import Homepage.radar_chart as radar_chart
-import Homepage.slider as slider
+import home_page.components.training_metrics as training_metrics
+import home_page.components.calender_calculator as calender_calculator
+import home_page.components.radar_chart as radar_chart
+import utils.slider as slider
 from streamlit_extras.metric_cards import style_metric_cards
-import datetime
+
 def main(workout_data):
     st.title("Overview")
-    limited_workout_data = limit_dataset(workout_data)
+    limited_workout_data = slider.limit_dataset(workout_data)
     create_metrics(limited_workout_data)
 
     cols = st.columns(2)
@@ -65,12 +65,3 @@ def create_radar_chart(workout_data):
     
     st.pyplot(chart)
     return
-
-def limit_dataset(workout_data):
-    max_months_available = (workout_data['start_time'].max() - workout_data['start_time'].min()).days // 30
-
-    limit_value= slider.get_limitation_value(max_months_available)
-
-    limited_workout_data = slider.filter_data_by_limitation_value(workout_data, limit_value)
-
-    return limited_workout_data

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from Homepage.excercises import EXERCISE_MAPPING
+from utils.excercises import EXERCISE_MAPPING
 
 def process_file():
     # Reverse the mapping for easier lookup

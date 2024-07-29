@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
-import Homepage.data_cleaning as data_cleaning
-import Homepage.home_page as home_page
+import utils.data_cleaning as data_cleaning
+import home_page.home_page_main as home_page
+import statistic_page.stats_page_main as stats_page
 from streamlit_option_menu import option_menu 
 
 def main():
@@ -48,6 +49,7 @@ def create_selection_bar(workout_data):
 
     elif selected_option == "Statistic":
         st.title("Welcome to Statistic Page")
+        stats_page.main(workout_data)
 
     elif selected_option == "Contact":
         st.title("Welcome to Contact Page")
