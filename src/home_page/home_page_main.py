@@ -3,10 +3,10 @@ import home_page.components.training_metrics as training_metrics
 import home_page.components.calender_calculator as calender_calculator
 import home_page.components.radar_chart as radar_chart
 import utils.slider as slider
-from streamlit_extras.metric_cards import style_metric_cards
+from streamlit_extras.metric_cards import style_metric_cards 
 
 def main(workout_data):
-    st.title("Overview")
+    
     limited_workout_data = slider.limit_dataset(workout_data)
     create_metrics(limited_workout_data)
 
@@ -39,7 +39,7 @@ def create_metrics(workout_data):
         st.metric(label="Longest Streak", value=longest_streak)
     with colss[3]:
         st.metric(label="Most trained in a week", value=most_trained)
-    style_metric_cards("white", 1, "#CCCCCC", 10, "#FF6347",True)
+    style_metric_cards("#FFF", 1, "#CCCCCC", 10, "#FF6347",True)
     return
 
 def create_calender(workout_data):

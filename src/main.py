@@ -4,6 +4,8 @@ import utils.data_cleaning as data_cleaning
 import home_page.home_page_main as home_page
 import statistic_page.stats_page_main as stats_page
 from streamlit_option_menu import option_menu 
+import streamlit_shadcn_ui as shcn
+import streamlit_shadcn_ui.components as shcn_components
 
 def main():
     workout_data = get_csv_file()
@@ -45,6 +47,7 @@ def create_selection_bar(workout_data):
             menu_icon="th-large", default_index=0, orientation="horizontal"
         )
     if selected_option == "Home":
+        st.title("Overview")
         home_page.main(workout_data)
 
     elif selected_option == "Statistic":
