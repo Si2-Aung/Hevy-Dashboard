@@ -1,5 +1,4 @@
 import bleach
-from bleach.css_sanitizer import CSSSanitizer
 import calendar
 
 def prepare_dataframe(workout_data):
