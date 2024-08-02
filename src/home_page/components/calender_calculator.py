@@ -51,10 +51,9 @@ def build_calendar(year, month, training_days):
     
     # Combine header and rows
     table = header + rows + "</table>"
-    secured_table = secure_HTML(table)
-    return secured_table
+    return table
     
-def secure_HTML(table):
+"""def secure_HTML(table):
     tags=['table', 'tr', 'th', 'td']
     css_sanitizer = CSSSanitizer(allowed_css_properties=[
             'border-collapse', 'width', 'background-color', 'color', 'border-radius', 
@@ -74,6 +73,6 @@ def secure_HTML(table):
         css_sanitizer=css_sanitizer,
         strip=True
     )
-    return secured_table
+    return secured_table"""
 
 
