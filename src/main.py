@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
 import utils.data_cleaning as data_cleaning
+import utils.themes as themes
 import home_page.home_page_main as home_page
 import statistic_page.stats_page_main as stats_page
 from streamlit_option_menu import option_menu 
-import streamlit_shadcn_ui as shcn
-import streamlit_shadcn_ui.components as shcn_components
+
 
 def main():
     workout_data = get_csv_file()
@@ -40,22 +40,65 @@ def how_to_upload():
     """)
 
 def create_selection_bar(workout_data):
+    if 'selected_option' not in st.session_state:
+        st.session_state.selected_option = "Home"
+
     selected_option = option_menu(
             menu_title=None,
             options=["Home", "Statistic", "Contact"],
             icons=["house", "book", "phone"],
             menu_icon="th-large", default_index=0, orientation="horizontal"
         )
+    
     if selected_option == "Home":
+        if "homereloaded" not in st.session_state:
+            st.session_state.homereloaded = False
+
+        if st.session_state.selected_option != "Home":
+            st.session_state.homereloaded = True
+            st.session_state.selected_option = "Home"
+
+        if st.session_state.homereloaded:
+            themes.set_home_page_theme()
+            st.session_state.homereloaded = False
+            st.rerun()
+
         st.title("Overview")
         home_page.main(workout_data)
 
+
     elif selected_option == "Statistic":
+        if "statisticreloaded" not in st.session_state:
+            st.session_state.statisticreloaded = False
+
+        if st.session_state.selected_option != "Statistic":
+            st.session_state.statisticreloaded = True
+            st.session_state.selected_option = "Statistic"
+
+        if st.session_state.statisticreloaded:
+            themes.set_statistic_page_theme()
+            st.session_state.statisticreloaded = False
+            st.rerun()
+
         st.title("Welcome to Statistic Page")
         stats_page.main(workout_data)
 
+
     elif selected_option == "Contact":
+        if "contactreloaded" not in st.session_state:
+            st.session_state.contactreloaded = False
+
+        if st.session_state.selected_option != "Contact":
+            st.session_state.contactreloaded = True
+            st.session_state.selected_option = "Contact"
+
+        if st.session_state.contactreloaded:
+            themes.set_contact_page_theme()
+            st.session_state.contactreloaded = False
+            st.rerun()
+
         st.title("Welcome to Contact Page")
-    return
+
+
 
 main()

@@ -6,7 +6,6 @@ import utils.slider as slider
 from streamlit_extras.metric_cards import style_metric_cards 
 
 def main(workout_data):
-    
     limited_workout_data = slider.limit_dataset(workout_data)
     create_metrics(limited_workout_data)
 
@@ -17,6 +16,7 @@ def main(workout_data):
     with cols[1]:
         st.subheader("Focused muscle groups")
         create_radar_chart(limited_workout_data)
+
     
 
 def create_metrics(workout_data):

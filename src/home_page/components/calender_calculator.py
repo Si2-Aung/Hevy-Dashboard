@@ -1,5 +1,3 @@
-import bleach
-from bleach.css_sanitizer import CSSSanitizer
 import calendar
 
 def prepare_dataframe(workout_data):
@@ -53,26 +51,5 @@ def build_calendar(year, month, training_days):
     table = header + rows + "</table>"
     return table
     
-"""def secure_HTML(table):
-    tags=['table', 'tr', 'th', 'td']
-    css_sanitizer = CSSSanitizer(allowed_css_properties=[
-            'border-collapse', 'width', 'background-color', 'color', 'border-radius', 
-            'box-shadow', 'padding', 'text-align', 'font-size', 'border-top-left-radius', 
-            'border-top-right-radius'
-    ])
-    attributes={
-        'table': ['style'],
-        'tr': ['style'],
-        'th': ['style', 'colspan'],
-        'td': ['style']
-    }
-    secured_table = bleach.clean(
-        table, 
-        tags=tags,
-        attributes=attributes,
-        css_sanitizer=css_sanitizer,
-        strip=True
-    )
-    return secured_table"""
 
 
