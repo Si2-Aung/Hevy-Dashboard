@@ -8,6 +8,8 @@ def set_page_theme(selected_option):
 def set_initial_session_state():
     if 'selected_option' not in st.session_state:
         st.session_state.selected_option = "Home"
+    if 'page_index' not in st.session_state:
+        st.session_state.page_index = 0
 
     keys = ['homereloaded', 'statisticreloaded', 'contactreloaded']
     for key in keys:
@@ -18,10 +20,13 @@ def handle_option_change(selected_option):
     if st.session_state.selected_option != selected_option:
         if selected_option == "Home":
             st.session_state.homereloaded = True
+            st.session_state.page_index = 0
         elif selected_option == "Statistic":
             st.session_state.statisticreloaded = True
+            st.session_state.page_index = 1
         elif selected_option == "Contact":
             st.session_state.contactreloaded = True
+            st.session_state.page_index = 2
         st.session_state.selected_option = selected_option
 
 def reload_page_if_needed():
