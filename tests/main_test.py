@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 # Assume the file's methods are imported correctly
-from main import main, get_csv_file, how_to_upload, create_selection_bar
+from streamlit_app import main, get_csv_file, how_to_upload, create_selection_bar
 
 class TestMainPy(unittest.TestCase):
 

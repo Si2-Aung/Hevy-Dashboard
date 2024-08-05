@@ -41,10 +41,9 @@ def display_how_to_upload():
     """)
 
 def create_selection_bar():
-    page_index = 0
     if 'page_index' in st.session_state:
         page_index = st.session_state.page_index
-        
+    else: page_index = 0
     selected_option = option_menu(
             menu_title=None,
             options=["Home", "Statistic", "Contact"],
