@@ -1,8 +1,8 @@
 import streamlit as st
-import home_page.components.training_metrics as training_metrics
-import home_page.components.calender_calculator as calender_calculator
-import home_page.components.radar_chart as radar_chart
-import utils.slider as slider
+from src.home_page.components import training_metrics
+from src.home_page.components import calender_calculator
+from src.home_page.components import radar_chart
+from src.utils import slider
 from streamlit_extras.metric_cards import style_metric_cards 
 
 def main(workout_data):

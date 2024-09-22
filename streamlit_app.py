@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
-import utils.data_cleaning as data_cleaning
-import utils.themes as themes
-import home_page.home_page_main as home_page
-import statistic_page.stats_page_main as stats_page
+from src.utils import data_cleaning
+from src.utils import themes
+from src.home_page import home_page_main
+from src.statistic_page import stats_page_main
 from streamlit_option_menu import option_menu 
 
 
@@ -55,14 +55,14 @@ def create_selection_bar():
 def display_selected_page(selected_option, workout_data):
     if selected_option == "Home":
         st.title("Overview📝")
-        home_page.main(workout_data)
+        home_page_main.main(workout_data)
     elif selected_option == "Statistic":
         st.title("Welcome to Statistic Page")
-        stats_page.main(workout_data)
+        stats_page_main.main(workout_data)
     elif selected_option == "Contact":
         st.title("Welcome to Contact Page")
 
 
 
-if __name__ == "__main__":
-    main()
+
+main()
