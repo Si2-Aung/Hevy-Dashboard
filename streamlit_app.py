@@ -48,7 +48,7 @@ def create_selection_bar():
             menu_title=None,
             options=["Home", "Statistic", "Contact"],
             icons=["house", "book", "phone"],
-            menu_icon="th-large", default_index=page_index, orientation="horizontal"
+            menu_icon="th-large", default_index = page_index, orientation="horizontal"
     )
     return selected_option
 

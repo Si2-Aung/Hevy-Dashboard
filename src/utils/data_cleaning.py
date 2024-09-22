@@ -4,14 +4,15 @@ def clean(workoutdata):
     if not isinstance(workoutdata, pd.DataFrame):
         raise ValueError("Input data must be a pandas DataFrame")
 
-    remove_unnecessary_columns(workoutdata)
-    convert_data_types(workoutdata)
+    removed_wkd = remove_unnecessary_columns(workoutdata)
+    convert_data_types(removed_wkd)
     
-    return workoutdata
+    return removed_wkd
 
 def remove_unnecessary_columns(workoutdata):
     columns_to_remove = ['rpe', 'description', 'superset_id', 'exercise_notes', 'set_type']
-    workoutdata = workoutdata.drop(columns=columns_to_remove, errors='ignore')
+    clean_wkd = workoutdata.drop(columns=columns_to_remove, errors='ignore')
+    return clean_wkd
 
 def convert_data_types(workoutdata):
     # Convert date columns to datetime objects
