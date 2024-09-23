@@ -1,7 +1,5 @@
 from streamlit.testing.v1 import AppTest
-from unittest.mock import patch, MagicMock
 import pandas as pd
-import streamlit as st
 
 # Mock data for testing
 mock_csv_data = pd.DataFrame({
@@ -27,6 +25,11 @@ def test_get_csv():
     app.session_state["uploaded_data"] = mock_csv_data
     assert app.session_state["uploaded_data"] is not None
 
+def test_display_selected_page():
+    app = AppTest.from_file("streamlit_app.py").run()
+    sidebar = app.get("sidebar")
+    assert sidebar is not None
 
-
-
+    assert 'page_index' not in app.session_state
+    app.session_state["page_index"] = 0
+    assert app.session_state["page_index"] == 0

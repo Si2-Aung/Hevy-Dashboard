@@ -12,10 +12,10 @@ def main():
     if workout_data is None:    
         display_how_to_upload()
     else:
-        data_cleaning.clean(workout_data)
+        cleaned_workoutdata = data_cleaning.clean(workout_data)
         selected_option = create_selection_bar()
         themes.set_page_theme(selected_option)
-        display_selected_page(selected_option, workout_data)
+        display_selected_page(selected_option, cleaned_workoutdata)
     
 def get_csv_file():
     if 'uploaded_data' not in st.session_state:
