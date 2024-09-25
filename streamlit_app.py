@@ -11,6 +11,7 @@ def main():
     workout_data = get_csv_file()
     if workout_data is None:    
         display_how_to_upload()
+        display_test_this_app()
     else:
         cleaned_workoutdata = data_cleaning.clean(workout_data)
         selected_option = create_selection_bar()
@@ -39,6 +40,20 @@ def display_how_to_upload():
 
     **4.** **Enjoy the app** 🎉
     """)
+
+def display_test_this_app():
+    st.title("🎲Test this app without data?")
+    col1, col2 = st.columns([8, 2])  # Adjust column width ratios as needed
+    with col1:
+        st.write("You can try the app with the random data below, no upload needed 🎉")
+    with col2:
+        use_random = st.toggle("Test now!")
+    if use_random:
+        st.session_state.uploaded_data = pd.read_csv("random_data.csv")
+        st.rerun()
+    
+    st.dataframe(pd.read_csv("random_data.csv"))
+
 
 def create_selection_bar():
     if 'page_index' in st.session_state:

@@ -16,8 +16,7 @@ def main(workout_data):
     with cols[1]:
         st.subheader("Focused muscle groups")
         create_radar_chart(limited_workout_data)
-
-    
+    return
 
 def create_metrics(workout_data):
     total_workouts = training_metrics.calculate_total_workouts(workout_data)
