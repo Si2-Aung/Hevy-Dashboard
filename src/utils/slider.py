@@ -8,13 +8,14 @@ def limit_dataset(workout_data):
     return limited_workout_data
 
 def filter_data_by_limitation_value(workout_data, limitation_value):
+    limit_dataset = workout_data.copy()
     if limitation_value == 0:
-        return workout_data
+        return limit_dataset
     else:
-        latest_date = workout_data['start_time'].max()
+        latest_date = limit_dataset['start_time'].max()
         start_date = latest_date - pd.DateOffset(months=limitation_value)
-        workout_data = workout_data.loc[workout_data['start_time'] >= start_date]
-        return workout_data
+        limit_dataset = limit_dataset.loc[limit_dataset['start_time'] >= start_date]
+        return limit_dataset
     
     
 def get_limitation_value(max_months_available):
