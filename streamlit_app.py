@@ -4,6 +4,7 @@ from src.utils import data_cleaning
 from src.utils import themes
 from src.home_page import home_page_main
 from src.statistic_page import stats_page_main
+from src.contact_page import contact_main
 from streamlit_option_menu import option_menu 
 
 
@@ -42,19 +43,15 @@ def display_how_to_upload():
     """)
 
 def display_test_this_app():
-    st.title("🎲Test this app without data?")
-    col1, col2 = st.columns([8, 2])  # Adjust column width ratios as needed
-    with col1:
-        st.write("You can try the app with the random data below, no upload needed 🎉")
-    with col2:
-        use_random = st.toggle("Test now!")
-    if use_random:
-        st.session_state.uploaded_data = pd.read_csv("random_data.csv")
-        st.rerun()
+    st.title("🎲Test this app?")
+    st.write("You can try the app with the random data below, no upload needed 🎉")
+    st.dataframe(pd.read_csv("random_data.csv").head(6))
+    test_now = st.toggle("Test now")
     
-    st.dataframe(pd.read_csv("random_data.csv"))
-
-
+    if test_now and 'uploaded_data' not in st.session_state:
+        st.session_state.uploaded_data = pd.read_csv("random_data.csv")
+        st.rerun() 
+    
 def create_selection_bar():
     if 'page_index' in st.session_state:
         page_index = st.session_state.page_index
@@ -75,7 +72,8 @@ def display_selected_page(selected_option, workout_data):
         st.title("Welcome to Statistic Page")
         stats_page_main.main(workout_data)
     elif selected_option == "Contact":
-        st.title("Welcome to Contact Page")
+        st.title(":mailbox: Any suggestions or feedback?")
+        contact_main.main()
 
 
 
