@@ -5,7 +5,7 @@ def create_contact_page():
     st.header("Contact me")
 
     contact_form = """
-    <form action="https://formsubmit.co/c2undben@gmail.com" method="POST">
+    <form action="https://formsubmit.co/sithu.henery@gmail.com" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
         <textarea name="message" placeholder="Your message here"></textarea>
