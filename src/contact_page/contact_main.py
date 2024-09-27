@@ -4,30 +4,22 @@ import streamlit as st
 def create_contact_page():
     st.header("Contact me")
 
-    # Initialize session state for form submission
-    if 'form_submitted' not in st.session_state:
-        st.session_state.form_submitted = False
+    contact_form = """
+    <form action="https://formsubmit.co/streamlit-page@mail.de" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your message here"></textarea>
+        <button type="submit">Send</button>
+    </form>
+    """
 
-    # Check for URL parameters (for example ?submitted=true)
+    st.markdown(contact_form, unsafe_allow_html=True)
+    
     if 'submitted' in st.query_params:
         st.session_state.form_submitted = True
-
-    # If the form has not been submitted, show the form
-    if not st.session_state.form_submitted:
-        contact_form = """
-        <form action="https://formsubmit.co/streamlit-page@mail.de" method="POST">
-            <input type="hidden" name="_next" value="?submitted=true">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your message here"></textarea>
-            <button type="submit">Send</button>
-        </form>
-        """
-
-        st.markdown(contact_form, unsafe_allow_html=True)
-    else:
-        st.success("Message sent successfully! You cannot submit another message.")
-
+        st.rerun()
+    
     # Load CSS for styling
     local_css("style.css")
 
@@ -62,5 +54,6 @@ def create_buttons():
 
 
 def main():
-    create_contact_page()
+    if 'form_submitted' not in st.session_state:
+        create_contact_page()
     create_buttons()
