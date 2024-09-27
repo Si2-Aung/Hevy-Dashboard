@@ -44,8 +44,7 @@ def display_how_to_upload():
 
 def display_test_this_app():
     st.title("🎲Test this app?")
-    st.write("You can try the app with the random data below, no upload needed 🎉")
-    st.dataframe(pd.read_csv("random_data.csv").head(6))
+    st.write("You can try the app with the random data, no upload needed 🎉")
     test_now = st.toggle("Test now")
     
     if test_now and 'uploaded_data' not in st.session_state:
