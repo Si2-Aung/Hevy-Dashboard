@@ -17,7 +17,6 @@ def create_contact_page():
         contact_form = """
         <form action="https://formsubmit.co/streamlit-page@mail.de" method="POST">
             <input type="hidden" name="_next" value="?submitted=true">
-            <input type="text" name="_honey" style="display:none">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <textarea name="message" placeholder="Your message here"></textarea>
