@@ -2,7 +2,7 @@ import streamlit as st
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from email_validator import validate_email, EmailNotValidError
+import email_validator as EmailValidator
 from datetime import datetime, timedelta
 
 # --- Function to initialize session state ---
@@ -28,9 +28,9 @@ def validate_form(sender_email, subject, message):
         st.error("All fields are required!")
         return False
     try:
-        valid = validate_email(sender_email)
+        valid = EmailValidator.validate_email(sender_email)
         sender_email = valid.email  # Use normalized version
-    except EmailNotValidError as e:
+    except EmailValidator.EmailNotValidError as e:
         st.error(f"Invalid email address: {e}")
         return False
 
