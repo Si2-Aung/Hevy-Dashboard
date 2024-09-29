@@ -75,6 +75,5 @@ def display_selected_page(selected_option, workout_data):
         contact_main.main()
 
 
-
-
-main()
+if __name__ == "__main__":
+    main()
