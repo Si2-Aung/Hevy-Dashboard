@@ -3,7 +3,6 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import email_validator as EmailValidator
-from datetime import datetime, timedelta
 
 # --- Function to initialize session state ---
 def initialize_session_state():
@@ -34,18 +33,6 @@ def validate_form(sender_email, subject, message):
         st.error(f"Invalid email address: {e}")
         return False
 
-    return True
-
-
-def check_cooldown():
-    cooldown_time = timedelta(minutes=10)
-    current_time = datetime.now()
-    last_sent_time = st.session_state.last_sent_time
-
-    if last_sent_time and current_time < last_sent_time + cooldown_time:
-        remaining_time = (last_sent_time + cooldown_time) - current_time
-        st.warning(f"Please wait {remaining_time.seconds // 60} minutes before sending another email.")
-        return False
     return True
 
 def send_email(user_email, subject, message):
@@ -82,10 +69,6 @@ def handle_email_sending():
         st.success("Email has already been sent. You cannot send more emails.")
         return
 
-    # Check the cooldown before rendering the form
-    if not check_cooldown():
-        return
-
     # Render the email form
     submit_button, sender_email, subject, message = render_email_form()
 
@@ -98,7 +81,6 @@ def handle_email_sending():
         # Send the email if validation passes
         if send_email(sender_email, subject, message):
             st.session_state.email_sent = True
-            st.session_state.last_sent_time = datetime.now()  # Store the time of successful email send
             st.success("Email sent successfully!")
             st.rerun()
 
