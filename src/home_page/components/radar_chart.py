@@ -53,3 +53,8 @@ def create_labels():
     return ['Core', 'Leg', 'Arms', 'Back', 'Cardio', 'Chest', "Shoulders"]
 
 
+def main(workout_data):
+    excercise_category = process_file()
+    chart_stats = calculate_stats_for_chart(workout_data,excercise_category)
+    chart = create_radar_chart(chart_stats)
+    return chart

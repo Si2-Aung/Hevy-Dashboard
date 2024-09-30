@@ -52,4 +52,18 @@ def build_calendar(year, month, training_days):
     return table
     
 
+def main(workout_data):
+    prepared_dataframe = prepare_dataframe(workout_data)
+
+    most_workouts_month = find_month_with_most_workouts(prepared_dataframe)
+
+    training_days = get_training_days_of_month(prepared_dataframe, most_workouts_month)
+
+    most_workouts_year = most_workouts_month.year
+
+    calender = build_calendar(most_workouts_year, most_workouts_month.month, training_days)
+
+    return calender
+    
+
 

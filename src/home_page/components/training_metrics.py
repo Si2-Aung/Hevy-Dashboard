@@ -1,4 +1,6 @@
 import pandas as pd
+import streamlit as st
+from streamlit_extras.metric_cards import style_metric_cards 
 
 # Function to calculate total workouts
 def calculate_total_workouts(workout_data: pd.DataFrame) -> str:
@@ -45,3 +47,26 @@ def calculate_longest_streak(prepared_df: pd.DataFrame) -> str:
 # Function to calculate the most trained sessons in a week
 def calculate_weekly_streak(prepared_df: pd.DataFrame):
     return f"{prepared_df['count'].max()}"
+
+def main(workout_data: pd.DataFrame):
+    total_workouts = calculate_total_workouts(workout_data)
+
+    average_duration = calculate_average_duration(workout_data)
+
+    prepared_df = prepare_df_for_streak_calculation(workout_data)
+
+    longest_streak = calculate_longest_streak(prepared_df)
+
+    most_trained = calculate_weekly_streak(prepared_df)
+
+    colss = st.columns(4)
+    with colss[0]:
+        st.metric(label="Total Workout done", value=total_workouts)
+    with colss[1]:
+        st.metric(label="⌀ Workout Time", value=average_duration)
+    with colss[2]:
+        st.metric(label="Longest Streak", value=longest_streak)
+    with colss[3]:
+        st.metric(label="Most trained in a week", value=most_trained)
+    style_metric_cards("#FFF", 1, "#CCCCCC", 10, "#FF6347",True)
+    return
