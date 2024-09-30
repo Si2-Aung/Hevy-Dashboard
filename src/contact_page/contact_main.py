@@ -6,6 +6,7 @@ import email_validator as EmailValidator
 
 # --- Function to initialize session state ---
 def initialize_session_state():
+    
     if "email_sent" not in st.session_state:
         st.session_state.email_sent = False
     if "last_sent_time" not in st.session_state:
