@@ -28,7 +28,7 @@ def create_heatmap_data(workout_data : pd.DataFrame):
     return training_series
 
 def create_heatmap(training_series : pd.Series, year):
-    st.header("Training Heatmap")
+    st.subheader("Training Heatmap")
     fig, ax = plt.subplots(figsize=(10, 6))
     cmap = create_custom_colormap()
     calmap.yearplot(training_series, year=year, ax=ax, cmap=cmap)
