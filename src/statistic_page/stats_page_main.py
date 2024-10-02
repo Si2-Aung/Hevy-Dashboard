@@ -6,9 +6,11 @@ def main(workout_data):
     initialize_session_state()
 
     selected_timeframe, selected_category = display_time_category_selection()
-    filtered_data = fct.main(workout_data, selected_timeframe, selected_category)
+    unique_categroy_filtered_data = fct.main(workout_data, selected_timeframe, selected_category,True)
+    categroy_filtered_data = fct.main(workout_data, selected_timeframe, selected_category,False)
 
-    selected_exercise = display_exercise_selection(filtered_data)
+    selected_exercise = display_exercise_selection(unique_categroy_filtered_data)
+    excercise_filtered_data = fct.filter_data_by_exercise(categroy_filtered_data, selected_exercise)
     update_session_state(selected_exercise)
 
 

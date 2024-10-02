@@ -1,11 +1,18 @@
 import pandas as pd
 import src.statistic_page.components.excercises_categorized  as ec
 
-def main(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str):
+def main(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str, unique):
     colum_added_data = add_category_column(workout_data)
     time_filtered_data = filter_data_by_timeframe(colum_added_data, selected_timeframe)
     category_filtered_data = filter_data_by_category(time_filtered_data, selected_category)
-    return category_filtered_data
+
+    if unique:
+        return category_filtered_data['exercise_title'].unique()
+    else:   
+        return category_filtered_data
+
+def filter_data_by_exercise(workout_data: pd.DataFrame, selected_exercise: str):
+    return workout_data[workout_data['exercise_title'] == selected_exercise]
 
 def filter_data_by_timeframe(colum_added_data: pd.DataFrame, selected_timeframe: str):
     workout_data_filtered = colum_added_data.copy()
@@ -22,9 +29,9 @@ def filter_data_by_timeframe(colum_added_data: pd.DataFrame, selected_timeframe:
 
 def filter_data_by_category(workout_data: pd.DataFrame, selected_category: str):
     if selected_category == 'All Muscles':
-        return workout_data['exercise_title'].unique()
+        return workout_data
     else:
-        return workout_data[workout_data['category'] == selected_category]['exercise_title'].unique() #CHANGE THIS LATER
+        return workout_data[workout_data['category'] == selected_category]
 
 
 def add_category_column(workout_data: pd.DataFrame):
