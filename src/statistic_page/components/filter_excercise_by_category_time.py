@@ -1,7 +1,7 @@
 import pandas as pd
 import src.statistic_page.components.excercises_categorized  as ec
 
-def main(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str, unique):
+def filter(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str, unique):
     colum_added_data = add_category_column(workout_data)
     time_filtered_data = filter_data_by_timeframe(colum_added_data, selected_timeframe)
     category_filtered_data = filter_data_by_category(time_filtered_data, selected_category)
@@ -12,7 +12,9 @@ def main(workout_data: pd.DataFrame, selected_timeframe: str, selected_category:
         return category_filtered_data
 
 def filter_data_by_exercise(workout_data: pd.DataFrame, selected_exercise: str):
-    return workout_data[workout_data['exercise_title'] == selected_exercise]
+    excercise_filtered_data = workout_data[workout_data['exercise_title'] == selected_exercise]
+    excercise_filtered_data.reset_index(drop=True, inplace=True)
+    return excercise_filtered_data
 
 def filter_data_by_timeframe(colum_added_data: pd.DataFrame, selected_timeframe: str):
     workout_data_filtered = colum_added_data.copy()
@@ -36,7 +38,7 @@ def filter_data_by_category(workout_data: pd.DataFrame, selected_category: str):
 
 def add_category_column(workout_data: pd.DataFrame):
     colum_added_data = workout_data.copy()
-    colum_added_data['category'] = 'custom'
+    colum_added_data['category'] = 'Custom'
     exercises = colum_added_data['exercise_title']
     for index, exercise in exercises.items():
         is_in_category = False
@@ -46,8 +48,5 @@ def add_category_column(workout_data: pd.DataFrame):
                 is_in_category = True
                 break
         if not is_in_category:
-            colum_added_data.at[index, 'category'] = 'custom'
+            colum_added_data.at[index, 'category'] = 'Custom'
     return colum_added_data
-
-if __name__ == "__main__":
-    main()

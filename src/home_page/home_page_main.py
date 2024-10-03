@@ -6,7 +6,7 @@ from src.home_page.components import heatmap_calender
 from src.utils import slider
 
 def create_metrics(workout_data):
-    training_metrics.main(workout_data)
+    training_metrics.create_metrics(workout_data)
     return
 
 def create_calender(workout_data):

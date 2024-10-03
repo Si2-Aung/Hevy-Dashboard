@@ -48,7 +48,7 @@ def calculate_longest_streak(prepared_df: pd.DataFrame) -> str:
 def calculate_weekly_streak(prepared_df: pd.DataFrame):
     return f"{prepared_df['count'].max()}"
 
-def main(workout_data: pd.DataFrame):
+def create_metrics(workout_data: pd.DataFrame):
     total_workouts = calculate_total_workouts(workout_data)
 
     average_duration = calculate_average_duration(workout_data)

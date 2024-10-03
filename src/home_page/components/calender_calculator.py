@@ -1,5 +1,4 @@
 import calendar
-
 def prepare_dataframe(workout_data):
     workout_time = workout_data[['start_time']].copy()
     workout_time['workout_month'] = workout_time['start_time'].dt.to_period('M')

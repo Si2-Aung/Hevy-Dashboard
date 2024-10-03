@@ -1,17 +1,23 @@
 import streamlit as st
-from src.statistic_page.components import filter_category_time as fct
+from src.statistic_page.components import stats_metrics
+from src.statistic_page.components import filter_excercise_by_category_time as fct
 
 
 def main(workout_data):
     initialize_session_state()
 
     selected_timeframe, selected_category = display_time_category_selection()
-    unique_categroy_filtered_data = fct.main(workout_data, selected_timeframe, selected_category,True)
-    categroy_filtered_data = fct.main(workout_data, selected_timeframe, selected_category,False)
+    unique_categroy_filtered_data = fct.filter(workout_data, selected_timeframe, selected_category,True)
+    categroy_filtered_data = fct.filter(workout_data, selected_timeframe, selected_category,False)
 
     selected_exercise = display_exercise_selection(unique_categroy_filtered_data)
     excercise_filtered_data = fct.filter_data_by_exercise(categroy_filtered_data, selected_exercise)
+    st.dataframe(excercise_filtered_data)
     update_session_state(selected_exercise)
+
+    if not excercise_filtered_data.empty:
+        stats_metrics.display_metrics(excercise_filtered_data)
+
 
 
 def initialize_session_state():
@@ -31,8 +37,8 @@ def display_time_category_selection():
 
     with columns[0]:
         category_options = [
-            "All Muscles", "Custom", "Biceps", "Lower Back", "Abdominals",
-            "Upper Back", "Cardio", "Chest", "Calves", "Forearms", "Glutes",
+            "All Muscles", "Chest", "Biceps", "Lower Back", "Abdominals",
+            "Upper Back", "Cardio", "Calves", "Forearms", "Glutes", "Custom",
             "Hamstrings", "Lats", "Quadriceps", "Shoulders", "Triceps", "Traps", "Neck", "Full Body"
         ]
         selected_category = st.selectbox("Select a Muscle group", category_options)
@@ -50,7 +56,8 @@ def display_exercise_selection(workout_data):
     if selected_exercise in workout_data:
         index = workout_data.tolist().index(selected_exercise)
     else:
-        st.warning("Selected exercise is not available for the current filters.")
+        st.warning("No data available for the selected filters.")
         index = 0  # Default to the first exercise
 
     return st.selectbox("Select an Exercise", workout_data, index=index)
+
