@@ -3,6 +3,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import email_validator as EmailValidator
+import streamlit_antd_components as stac
 
 # --- Function to initialize session state ---
 def initialize_session_state():
@@ -18,8 +19,8 @@ def render_email_form():
         sender_email = st.text_input("Your Email", value="", placeholder="Enter your email", max_chars=50)
         subject = st.text_input("Subject", value="", placeholder="Enter the email subject", max_chars=100)
         message = st.text_area("Message", value="", placeholder="Enter your message", max_chars=1000)
-        submit_button = st.form_submit_button(label="Send Email")
-        
+        submit_button = st.form_submit_button(label="💌 Send Email")
+
         return submit_button, sender_email, subject, message
 
 # --- Function to validate the form ---
@@ -108,8 +109,14 @@ def create_buttons():
         st.image(hevy_logo, width=logo_width)
         st.markdown('<a href="https://www.hevy.com" target="_blank"><button style="background-color:#f44336;color:white;width:100px;margin-top:10px;">Hevy</button></a>', unsafe_allow_html=True)
 
-# --- Main application logic ---
+def create_cooler_buttons():
+    stac.buttons([
+    stac.ButtonsItem(label='GitHub', icon='github', color='#24292e', href="https://github.com/Si2-Aung"),
+    stac.ButtonsItem(label='LinkedIn', icon='linkedin', color='#0a66c2', href="https://www.linkedin.com/in/si-thu-aung-31203532a/"),
+    stac.ButtonsItem(label='Hevy', icon='share-fill', color='#25C3B0',href="https://www.hevy.com")
+    ], label='', align='left')
+
 def main():
     initialize_session_state()
     handle_email_sending()
-    create_buttons()
+    create_cooler_buttons()

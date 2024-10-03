@@ -47,8 +47,8 @@ def create_duration_only_metrics(excercise_filtered_data: pd.DataFrame):
     return
 
 def create_reps_metrics(excercise_filtered_data: pd.DataFrame):
-    most_reps = excercise_filtered_data["reps"].max()
-    avg_reps = excercise_filtered_data["reps"].mean()
+    most_reps = round(excercise_filtered_data["reps"].max())
+    avg_reps = round(excercise_filtered_data["reps"].mean())
 
     display_metric("Most reps", most_reps, "⌀ Average reps", avg_reps)
     return
