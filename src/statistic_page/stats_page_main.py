@@ -12,7 +12,7 @@ def main(workout_data):
 
     selected_exercise = display_exercise_selection(unique_categroy_filtered_data)
     excercise_filtered_data = fct.filter_data_by_exercise(categroy_filtered_data, selected_exercise)
-    st.dataframe(excercise_filtered_data)
+    #st.dataframe(excercise_filtered_data)
     update_session_state(selected_exercise)
 
     if not excercise_filtered_data.empty:

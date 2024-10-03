@@ -17,7 +17,7 @@ def create_weighted_metrics(excercise_filtered_data: pd.DataFrame):
     with colss[0]:
         st.metric(label="Heaviest Weight", value=heaviest_weight_value)
     with colss[1]:
-        st.metric(label="⌀ Best 1RPM", value=best_1rpm_value)
+        st.metric(label="Best 1RPM", value=best_1rpm_value)
     with colss[2]:
         st.metric(label="Best set Volume", value=best_set_volume_value)
     with colss[3]:
