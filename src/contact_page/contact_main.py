@@ -16,12 +16,16 @@ def initialize_session_state():
 # --- Function to render the form ---
 def render_email_form():
     with st.form(key="email_form"):
-        sender_email = st.text_input("Your Email", value="", placeholder="Enter your email", max_chars=50)
-        subject = st.text_input("Subject", value="", placeholder="Enter the email subject", max_chars=100)
-        message = st.text_area("Message", value="", placeholder="Enter your message", max_chars=1000)
+        load_css("styles.css")
+        sender_email = st.text_input("Your Email", value="", placeholder="Enter your email", max_chars=50, key="email")
+        subject = st.text_input("Subject", value="", placeholder="Enter the email subject", max_chars=100, key="subject")
+        message = st.text_area("Message", value="", placeholder="Enter your message", max_chars=1000, key="message")
         submit_button = st.form_submit_button(label="💌 Send Email")
-
         return submit_button, sender_email, subject, message
+    
+def load_css(file_name:str)->None:
+    with open(file_name) as f:
+        st.html(f'<style>{f.read()}</style>')
 
 # --- Function to validate the form ---
 def validate_form(sender_email, subject, message):
@@ -64,9 +68,6 @@ def send_email(user_email, subject, message):
         return False
 
 def handle_email_sending():
-    st.header("Contact me")
-
-    # Check if the email has already been sent or if we are within cooldown
     if st.session_state.email_sent:
         st.success("Email has already been sent. You cannot send more emails.")
         return
@@ -74,21 +75,17 @@ def handle_email_sending():
     # Render the email form
     submit_button, sender_email, subject, message = render_email_form()
 
-    # Handle form submission
     if submit_button:
-        # First validate the form fields
         if not validate_form(sender_email, subject, message):
             return
 
-        # Send the email if validation passes
         if send_email(sender_email, subject, message):
             st.session_state.email_sent = True
             st.success("Email sent successfully!")
             st.rerun()
 
 def create_buttons():
-    st.header("Explore my professional networks")
-    col1, col2, col3 = st.columns([4, 4, 3])
+    col1, col2, col3 = st.columns(3,gap ='small',vertical_alignment='center')
     logo_width = 100
 
     # GitHub
@@ -111,10 +108,10 @@ def create_buttons():
 
 def create_cooler_buttons():
     stac.buttons([
-    stac.ButtonsItem(label='GitHub', icon='github', color='#24292e', href="https://github.com/Si2-Aung"),
-    stac.ButtonsItem(label='LinkedIn', icon='linkedin', color='#0a66c2', href="https://www.linkedin.com/in/si-thu-aung-31203532a/"),
-    stac.ButtonsItem(label='Hevy', icon='share-fill', color='#25C3B0',href="https://www.hevy.com")
-    ], label='', align='left')
+    stac.ButtonsItem(label='GitHub', icon='github',  href="https://github.com/Si2-Aung"),
+    stac.ButtonsItem(label='LinkedIn', icon='linkedin', href="https://www.linkedin.com/in/si-thu-aung-31203532a/"),
+    stac.ButtonsItem(label='Hevy', icon='share-fill', href="https://www.hevy.com")
+    ], label='', align='left',color='black')
 
 def main():
     initialize_session_state()
