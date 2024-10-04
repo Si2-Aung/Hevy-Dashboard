@@ -1,15 +1,13 @@
 import pandas as pd
-import src.statistic_page.components.excercises_categorized  as ec
+import statistic_page.components.excercises_category  as ec
 
-def filter(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str, unique):
+def filter(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str):
     colum_added_data = add_category_column(workout_data)
     time_filtered_data = filter_data_by_timeframe(colum_added_data, selected_timeframe)
     category_filtered_data = filter_data_by_category(time_filtered_data, selected_category)
 
-    if unique:
-        return category_filtered_data['exercise_title'].unique()
-    else:   
-        return category_filtered_data
+    return category_filtered_data
+
 
 def filter_data_by_exercise(workout_data: pd.DataFrame, selected_exercise: str):
     excercise_filtered_data = workout_data[workout_data['exercise_title'] == selected_exercise]

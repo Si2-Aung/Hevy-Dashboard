@@ -13,19 +13,19 @@ def initialize_session_state():
     if "last_sent_time" not in st.session_state:
         st.session_state.last_sent_time = None
 
+def load_css(file_name:str)->None:
+    with open(file_name) as f:
+        st.html(f'<style>{f.read()}</style>')
+
 # --- Function to render the form ---
 def render_email_form():
     with st.form(key="email_form"):
-        load_css("styles.css")
         sender_email = st.text_input("Your Email", value="", placeholder="Enter your email", max_chars=50, key="email")
         subject = st.text_input("Subject", value="", placeholder="Enter the email subject", max_chars=100, key="subject")
         message = st.text_area("Message", value="", placeholder="Enter your message", max_chars=1000, key="message")
         submit_button = st.form_submit_button(label="💌 Send Email")
         return submit_button, sender_email, subject, message
     
-def load_css(file_name:str)->None:
-    with open(file_name) as f:
-        st.html(f'<style>{f.read()}</style>')
 
 # --- Function to validate the form ---
 def validate_form(sender_email, subject, message):
@@ -84,36 +84,15 @@ def handle_email_sending():
             st.success("Email sent successfully!")
             st.rerun()
 
-def create_buttons():
-    col1, col2, col3 = st.columns(3,gap ='small',vertical_alignment='center')
-    logo_width = 100
-
-    # GitHub
-    with col1:
-        github_logo = "https://pngimg.com/uploads/github/github_PNG23.png"
-        st.image(github_logo, width=logo_width)
-        st.markdown('<a href="https://github.com/Si2-Aung" target="_blank"><button style="background-color:#24292e;color:white;width:100px;margin-top:1px;">GitHub</button></a>', unsafe_allow_html=True)
-
-    # LinkedIn
-    with col2:
-        linkedin_logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/LinkedIn_logo.svg/800px-LinkedIn_logo.svg.png"
-        st.image(linkedin_logo, width=logo_width)
-        st.markdown('<a href="https://www.linkedin.com/in/si-thu-aung-31203532a/" target="_blank"><button style="background-color:#0a66c2;color:white;width:100px;margin-top:10px;">LinkedIn</button></a>', unsafe_allow_html=True)
-
-    # Hevy
-    with col3:
-        hevy_logo = "https://www.hevyapp.com/wp-content/uploads/hevy-logo.svg"
-        st.image(hevy_logo, width=logo_width)
-        st.markdown('<a href="https://www.hevy.com" target="_blank"><button style="background-color:#f44336;color:white;width:100px;margin-top:10px;">Hevy</button></a>', unsafe_allow_html=True)
-
 def create_cooler_buttons():
     stac.buttons([
     stac.ButtonsItem(label='GitHub', icon='github',  href="https://github.com/Si2-Aung"),
-    stac.ButtonsItem(label='LinkedIn', icon='linkedin', href="https://www.linkedin.com/in/si-thu-aung-31203532a/"),
-    stac.ButtonsItem(label='Hevy', icon='share-fill', href="https://www.hevy.com")
+    stac.ButtonsItem(label='LinkedIn', icon='linkedin', href="https://www.linkedin.com/in/si-thu-aung-31203532a/", color = 'blue'),
+    stac.ButtonsItem(label='Hevy', icon='share-fill', href="https://www.hevy.com", color='red')
     ], label='', align='left',color='black')
 
 def main():
     initialize_session_state()
+    load_css("assets/styles.css")
     handle_email_sending()
     create_cooler_buttons()

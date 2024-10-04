@@ -9,6 +9,7 @@ from streamlit_option_menu import option_menu
 
 
 def main():
+    load_css("assets/styles.css")
     workout_data = get_csv_file()
     if workout_data is None:    
         display_how_to_upload()
@@ -21,7 +22,7 @@ def main():
     
 def get_csv_file():
     if 'uploaded_data' not in st.session_state:
-        csv_file = st.file_uploader(" ", type="csv", label_visibility="collapsed")
+        csv_file = st.file_uploader(" ", type="csv", label_visibility="collapsed", key="file_uploader")
         if csv_file is not None:
             st.success("Data uploaded successfully")
             st.session_state.uploaded_data = pd.read_csv(csv_file)
@@ -74,6 +75,9 @@ def display_selected_page(selected_option, workout_data):
         st.title(":mailbox: Any suggestions or feedback?")
         contact_main.main()
 
+def load_css(file_name:str)->None:
+    with open(file_name) as f:
+        st.html(f'<style>{f.read()}</style>')
 
 if __name__ == "__main__":
     main()
