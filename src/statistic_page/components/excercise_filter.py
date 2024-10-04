@@ -1,12 +1,11 @@
 import pandas as pd
-import statistic_page.components.excercises_category  as ec
+import src.statistic_page.components.excercises_category  as ec
 
-def filter(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str):
+def filter_by_category_and_time(workout_data: pd.DataFrame, selected_timeframe: str, selected_category: str):
     colum_added_data = add_category_column(workout_data)
     time_filtered_data = filter_data_by_timeframe(colum_added_data, selected_timeframe)
-    category_filtered_data = filter_data_by_category(time_filtered_data, selected_category)
-
-    return category_filtered_data
+    category_and_time_filtered_data = filter_data_by_category(time_filtered_data, selected_category)
+    return category_and_time_filtered_data
 
 
 def filter_data_by_exercise(workout_data: pd.DataFrame, selected_exercise: str):
