@@ -32,10 +32,9 @@ def get_exercise(workout_data):
     workout_data = np.sort(workout_data)
     selected_exercise = st.session_state.selected_exercise
     
-    if selected_exercise in workout_data:
+    if selected_exercise in workout_data and selected_exercise is not None:
         index = workout_data.tolist().index(selected_exercise)
     else:
-        st.warning("No data available for the selected filters.")
         index = 0  # Default to the first exercise
 
     return st.selectbox("Select an Exercise", workout_data, index=index, key="exercise_selection")
