@@ -7,8 +7,9 @@ import streamlit as st
 def display(excercise_filtered_data: pd.DataFrame):
 
     if not excercise_filtered_data["weight_kg"].isna().all():
-        weighted_metrics.create_weighted_metrics(excercise_filtered_data)
         weighted_graph.main(excercise_filtered_data)
+        weighted_metrics.create_weighted_metrics(excercise_filtered_data)
+        
 
     elif not excercise_filtered_data["duration_seconds"].isna().all() and not excercise_filtered_data["distance_km"].isna().all():
         weightless_metrics.create_duration_distance_metrics(excercise_filtered_data)

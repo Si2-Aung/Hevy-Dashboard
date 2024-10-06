@@ -13,7 +13,6 @@ def main(workout_data):
     slected_exercise = input_selector.get_exercise(categroy_filtered_data['exercise_title'].unique())
     if slected_exercise is not None:
         excercise_filtered_data = excercise_filter.filter_data_by_exercise(categroy_filtered_data, slected_exercise)
-        st.dataframe(excercise_filtered_data)
 
         update_session_state(slected_exercise)
 
