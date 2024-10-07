@@ -32,6 +32,7 @@ def update_session_state(exercise):
     if exercise != st.session_state.selected_exercise:
         st.session_state.selected_exercise = exercise
         st.rerun()
+        
 def load_css(file_name:str)->None:
     with open(file_name) as f:
         st.html(f'<style>{f.read()}</style>')
