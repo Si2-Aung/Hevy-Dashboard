@@ -7,6 +7,7 @@ def get_category_input():
         "Upper Back", "Cardio", "Calves", "Forearms", "Glutes", "Custom",
         "Hamstrings", "Lats", "Quadriceps", "Shoulders", "Triceps", "Traps", "Neck", "Full Body"
     ]
+    category_options.sort()
     selected_category = st.selectbox("Select a Muscle group", category_options, key="category_selection")
     return selected_category
 

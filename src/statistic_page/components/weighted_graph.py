@@ -1,11 +1,9 @@
 import streamlit_antd_components as stac
-import streamlit as st
-import plotly.express as px
 import pandas as pd
+from src.statistic_page.components.line_chart_generator import create_line_chart
 
 
 def create_graph(excercise_filtered_data):
-
     selected_graph = get_graph_selection()
 
     if selected_graph == 'Heaviest weight':
@@ -23,7 +21,6 @@ def create_graph(excercise_filtered_data):
     elif selected_graph == 'One Rep Max':
         one_rep_max_data = prepare_one_rep_max_data(excercise_filtered_data)
         create_line_chart(one_rep_max_data, '1rm', 'One Rep Max', 1)
-
     return None
 
 def prepare_heaviest_weight_data(data: pd.DataFrame) -> pd.DataFrame:
@@ -45,7 +42,6 @@ def prepare_one_rep_max_data(data: pd.DataFrame) -> pd.DataFrame:
     one_rep_max_data['1rm'] = one_rep_max_data['weight_kg'] * (1 + one_rep_max_data['reps'] / 30)
     return one_rep_max_data.groupby('start_time')['1rm'].max().reset_index()
 
-
 def get_graph_selection():
     return stac.buttons([
     stac.ButtonsItem(label='Heaviest weight', icon='bar-chart'),
@@ -54,40 +50,5 @@ def get_graph_selection():
     stac.ButtonsItem(label='One Rep Max', icon='bar-chart'),
     ], label='', align='left', color='blue')
 
-
-def create_line_chart(data: pd.DataFrame, y_column: str, y_label: str, min_max_adjustment: int):
-    # Create an interactive line chart using Plotly
-    fig = px.line(data, 
-                  x=data.index,  
-                  y=y_column,  
-                  title=f'{y_label} Progress Over Time', 
-                  markers=True,
-                  labels={'x': 'Index', y_column: y_label}) 
-    
-    # Adjust y-axis range
-    min_value = data[y_column].min() - min_max_adjustment
-    max_value = data[y_column].max() + min_max_adjustment
-
-    fig.update_traces(
-        customdata=data['start_time'].dt.strftime('%d-%m-%Y'), 
-        hovertemplate=f'Date: %{{customdata}}<br>{y_label}: %{{y}}'
-    )
-    # Update layout for a modern look
-    tick_interval = max(1, len(data) // 18)  
-    fig.update_layout(
-        xaxis=dict(
-            tickmode='array',  
-            tickvals=data.index[::tick_interval], 
-            ticktext=data['start_time'].dt.strftime('%d-%m-%Y')[::tick_interval],
-            tickangle=45
-        ),  
-        xaxis_title=None, yaxis_title=y_label,  # Dynamic y-axis title
-        yaxis=dict(range=[min_value , max_value ]),  # Set min below the lowest value and add space above max
-        plot_bgcolor='white', hovermode='x unified',
-        margin=dict(t=50, b=50, l=20, r=10)
-    )
-
-    # Display the plot in Streamlit
-    st.plotly_chart(fig, use_container_width=False)
 
 

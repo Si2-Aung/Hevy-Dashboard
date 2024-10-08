@@ -22,7 +22,7 @@ def format_duration(duration_in_sec: float) -> str:
         return f"{minutes}:{seconds:02d} min"
     
 def calculate_best_time_per_km(excercise_data: pd.DataFrame):
-    running_data = excercise_data[excercise_data['exercise_title'] == 'Running']
+    running_data = excercise_data.copy()
     if running_data.empty or running_data['distance_km'].sum() == 0:
         return 0  
     running_data['time_per_km'] = running_data['duration_seconds'] / running_data['distance_km']
@@ -33,7 +33,7 @@ def create_duration_distance_metrics(excercise_filtered_data: pd.DataFrame):
     best_time_per_km = calculate_best_time_per_km(excercise_filtered_data)
     formatted_best_time_per_km = format_duration(best_time_per_km)
 
-    display_metric("Furthest distance", most_distance_value, "Best Time per km", formatted_best_time_per_km)
+    display_metric("Longest distance", most_distance_value, "Best Pace per km", formatted_best_time_per_km)
     return
 
 def create_duration_only_metrics(excercise_filtered_data: pd.DataFrame):
@@ -43,7 +43,7 @@ def create_duration_only_metrics(excercise_filtered_data: pd.DataFrame):
     longest_duration = format_duration(longest_duration_in_sec)
     avg_duration = format_duration(avg_duration_in_sec)
 
-    display_metric("Longest duration", longest_duration, "⌀ Average duration", avg_duration)
+    display_metric("Longest Time", longest_duration, "⌀ Average duration", avg_duration)
     return
 
 def create_reps_metrics(excercise_filtered_data: pd.DataFrame):
