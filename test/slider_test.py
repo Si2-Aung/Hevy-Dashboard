@@ -1,6 +1,6 @@
 import pandas as pd
 from pandas.testing import assert_frame_equal
-import src.utils.slider as slider  
+import home_page.components.slider as slider  
 
 
 

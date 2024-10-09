@@ -1,4 +1,21 @@
 import pandas as pd
+import streamlit as st
+
+def get_cleaned_csv_file():
+    workout_data = get_csv_file()
+    if workout_data is not None:
+        return clean(workout_data)
+
+def get_csv_file():
+    if 'uploaded_data' not in st.session_state:
+        csv_file = st.file_uploader(" ", type="csv", label_visibility="collapsed", key="file_uploader")
+        if csv_file is not None:
+            st.success("Data uploaded successfully")
+            st.session_state.uploaded_data = pd.read_csv(csv_file)
+            st.rerun()
+    else:
+        return st.session_state.uploaded_data
+    return None
 
 def clean(workoutdata):
     if not isinstance(workoutdata, pd.DataFrame):

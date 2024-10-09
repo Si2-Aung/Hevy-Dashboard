@@ -3,7 +3,7 @@ from src.home_page.components import training_metrics
 from src.home_page.components import calender_calculator
 from src.home_page.components import radar_chart
 from src.home_page.components import heatmap_calender
-from src.utils import slider
+from src.home_page.components import slider
 
 def create_metrics(workout_data):
     training_metrics.create_metrics(workout_data)
@@ -29,7 +29,7 @@ def main(workout_data):
 
     cols = st.columns(2)
     with cols[0]:
-        st.subheader("Most tryhard month")
+        st.subheader("Most trained month")
         create_calender(workout_data)
     with cols[1]:
         st.subheader("Focused muscle groups")
