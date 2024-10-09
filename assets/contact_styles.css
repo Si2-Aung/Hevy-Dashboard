@@ -1,0 +1,57 @@
+/* Customized input fields for email, subject, and message */
+div[data-testid="stApp"] {
+    background: linear-gradient(to left, #ffffff, #f2f2f2);
+}
+
+.st-key-email input, 
+.st-key-subject input, 
+.st-key-message textarea {
+    background-color: #f9f9f9; /* Softer background */
+    border: 1px solid #ccc; /* Softer, lighter border */
+    border-radius: 8px;
+    font-size: 16px; /* Slightly larger text */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Input fields hover effect for a more interactive feel */
+.st-key-email input:hover, 
+.st-key-subject input:hover, 
+.st-key-message textarea:hover {
+    border-color: #888; /* Darker border on hover */
+}
+
+/* Focus effect for input fields to make them stand out */
+.st-key-email input:focus, 
+.st-key-subject input:focus, 
+.st-key-message textarea:focus {
+    outline: none;
+    border-color: #008000; /* Match focus border with button green color */
+    box-shadow: 0px 3px 7px rgba(0, 128, 0, 0.2); /* Slight shadow with color focus */
+}
+
+button[data-testid="stBaseButton-secondaryFormSubmit"] {
+    background-color: #008000; /* Green background for the submit button */
+    color: white; /* White text color */
+    cursor: pointer; /* Optional: Pointer cursor on hover */
+}
+
+/* Optional: Hover effect to slightly darken the button */
+button[data-testid="stBaseButton-secondaryFormSubmit"]:hover {
+    background-color: #006400; /* Darker green on hover */
+}
+
+/* Styling the form container div */
+div[data-testid="stForm"] {
+    padding: 25px;
+    border: 1px solid #ddd; /* Lighter border for a cleaner look */
+    border-radius: 12px; /* Softer rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for modern elevation */
+    background-color: white; /* Clean white background */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+/* Adding hover effect to form container */
+div[data-testid="stForm"]:hover {
+    box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.15); /* Increase shadow on hover for depth */
+}

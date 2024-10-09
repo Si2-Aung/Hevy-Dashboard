@@ -5,7 +5,7 @@ from src.statistic_page.components import input_selector
 
 
 def main(workout_data):
-    load_css("assets/styles.css")
+    load_css("assets/stats_styles.css")
     initialize_session_state()
 
     slected_timeframe, slected_category = input_selector.get_timeframe_and_category()

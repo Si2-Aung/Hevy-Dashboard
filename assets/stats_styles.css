@@ -1,0 +1,10 @@
+div[data-testid="stApp"] {
+    background: linear-gradient(to left, #ffffff, red);
+}
+
+
+div[data-testid="stSelectbox"] .st-ap.st-bg  {
+    color: black; /* Black text color */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for modern elevation */
+    background-color: white; /* Clean white background */
+}

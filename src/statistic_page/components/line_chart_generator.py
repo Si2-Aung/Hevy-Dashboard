@@ -29,7 +29,7 @@ def create_line_chart(data: pd.DataFrame, y_column: str, y_label: str, min_max_a
         ),  
         xaxis_title=None, yaxis_title=y_label,  # Dynamic y-axis title
         yaxis=dict(range=[min_value , max_value ]),  # Set min below the lowest value and add space above max
-        plot_bgcolor='white', hovermode='x unified',
+        plot_bgcolor='white',
         margin=dict(t=30, b=50, l=10, r=10)
     )
 

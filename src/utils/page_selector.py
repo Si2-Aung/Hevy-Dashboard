@@ -10,7 +10,6 @@ def handle_page_selection(workout_data):
     themes.set_page_theme(selected_option)
     display_selected_page(selected_option, workout_data)
 
-
 def create_selection_bar():
     if 'page_index' in st.session_state:
         page_index = st.session_state.page_index
