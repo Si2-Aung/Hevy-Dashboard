@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from src.utils import data_cleaning
+from src.utils.load_css import load_css
 from src.utils import page_selector  as ps
 
 def main():
@@ -32,10 +33,6 @@ def display_test_this_app():
     if test_now and 'uploaded_data' not in st.session_state:
         st.session_state.uploaded_data = pd.read_csv("random_data.csv")
         st.rerun() 
-
-def load_css(file_name:str)->None:
-    with open(file_name) as f:
-        st.html(f'<style>{f.read()}</style>')
 
 if __name__ == "__main__":
     main()

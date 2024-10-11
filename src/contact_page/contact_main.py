@@ -1,15 +1,12 @@
 import streamlit as st
 import streamlit_antd_components as stac
+from src.utils.load_css import load_css
 from src.contact_page.email_form import handle_email_sending
 
 # --- Function to initialize session state ---
 def initialize_session_state():
     if "email_sent" not in st.session_state:
         st.session_state.email_sent = False
-
-def load_css(file_name:str)->None:
-    with open(file_name) as f:
-        st.html(f'<style>{f.read()}</style>')
 
 def create_credentials():
     stac.buttons([

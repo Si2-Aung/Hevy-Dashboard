@@ -1,4 +1,5 @@
 import streamlit as st
+from src.utils.load_css import load_css
 from src.home_page.components import training_metrics
 from src.home_page.components import calender_calculator
 from src.home_page.components import radar_chart
@@ -24,6 +25,7 @@ def create_heatmap(workout_data):
     return
 
 def main(workout_data):
+    load_css("assets/home_styles.css")
     limited_workout_data = slider.limit_dataset(workout_data)
     create_metrics(limited_workout_data)
 
