@@ -19,4 +19,5 @@ def main():
     load_css("assets/contact_styles.css")
     initialize_session_state()
     handle_email_sending()
+    st.divider()
     create_credentials()

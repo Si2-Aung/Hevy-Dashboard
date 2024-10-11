@@ -1,0 +1,16 @@
+button[data-testid="stBaseButton-secondary"] {
+    background-color: #f9f9f9; /* Softer background */
+    border: 1px solid #ccc; /* Softer, lighter border */
+    border-radius: 5px; /* Slightly less rounded corners */
+    font-size: 12px; /* Smaller text */
+    padding: 4px 8px; /* Less space inside the button */
+    width: 350px; /* Manually set the width */
+    height: 0px; /* Manually set the height */
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); /* Smaller shadow for more compact look */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Optional: Hover effect to slightly darken the button */
+button[data-testid="stBaseButton-secondary"]:hover {
+    border-color: grey; /* Darker border on hover */
+}

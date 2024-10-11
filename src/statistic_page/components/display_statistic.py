@@ -32,8 +32,9 @@ def display(excercise_filtered_data: pd.DataFrame):
     else:
         st.warning("Either there is no data, or I didnt checked this case yet. Choose other options please. ^^")
         return False
-
-    st.subheader("Your raw data for the selected excercise:")
+    
+    st.divider()
+    st.subheader("The raw data for the selected exercise")
     st.dataframe(excercise_filtered_data)
     
     return True

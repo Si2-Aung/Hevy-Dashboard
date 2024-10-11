@@ -11,11 +11,11 @@ def main(workout_data):
     slected_timeframe, slected_category = input_selector.get_timeframe_and_category()
     categroy_filtered_data = excercise_filter.filter_by_category_and_time(workout_data, slected_timeframe, slected_category)
     slected_exercise = input_selector.get_exercise(categroy_filtered_data['exercise_title'].unique())
+
     if slected_exercise is not None:
         excercise_filtered_data = excercise_filter.filter_data_by_exercise(categroy_filtered_data, slected_exercise)
-
         update_session_state(slected_exercise)
-
+        
         if not excercise_filtered_data.empty:
             display_statistic.display(excercise_filtered_data)
     else:

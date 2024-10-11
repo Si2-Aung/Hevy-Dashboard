@@ -24,10 +24,10 @@ def create_selection_bar():
 
 def display_selected_page(selected_option, workout_data):
     if selected_option == "Home":
-        st.title("Overview📝")
+        st.header("Get an Overview📝")
         home_page_main.main(workout_data)
     elif selected_option == "Statistic":
-        st.title("Welcome to Statistic Page")
+        st.header("Track Your Progress📊")
         stats_page_main.main(workout_data)
     elif selected_option == "Contact":
         st.title(":mailbox: Any suggestions or feedback?")
