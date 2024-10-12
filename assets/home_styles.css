@@ -1,3 +1,7 @@
+div[data-testid="stApp"] {
+    background: linear-gradient(to left, #ffffff, #faf8f7);
+}
+
 button[data-testid="stBaseButton-secondary"] {
     background-color: #f9f9f9; /* Softer background */
     border: 1px solid #ccc; /* Softer, lighter border */

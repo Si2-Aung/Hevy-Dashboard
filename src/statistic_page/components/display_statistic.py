@@ -34,8 +34,14 @@ def display(excercise_filtered_data: pd.DataFrame):
         return False
     
     st.divider()
-    st.subheader("The raw data for the selected exercise")
-    st.dataframe(excercise_filtered_data)
+    cols = st.columns([9,1],gap="large",vertical_alignment="bottom")
+    with cols[0]:
+        st.subheader("Show raw data for the selected exercise")
+    with cols[1]:
+        toggle = st.toggle("toogle", key="show_data", label_visibility="collapsed")
+
+    if toggle:
+        st.dataframe(excercise_filtered_data)
     
     return True
 

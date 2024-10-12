@@ -1,9 +1,21 @@
 import streamlit as st
+from src.utils.load_css import load_css
 from src.statistic_page.components import display_statistic
 from src.statistic_page.components import excercise_filter 
 from src.statistic_page.components import input_selector
 
 
+def initialize_session_state():
+    st.session_state.setdefault('selected_category', "All Muscles")
+    st.session_state.setdefault('selected_timeframe', "Last 3 months")
+    st.session_state.setdefault('selected_exercise', None)
+
+
+def update_session_state(exercise):
+    if exercise != st.session_state.selected_exercise:
+        st.session_state.selected_exercise = exercise
+        st.rerun()
+        
 def main(workout_data):
     load_css("assets/stats_styles.css")
     initialize_session_state()
@@ -20,20 +32,3 @@ def main(workout_data):
             display_statistic.display(excercise_filtered_data)
     else:
         st.warning("No data available for the selected filters. Choose other options.")
-    
-
-def initialize_session_state():
-    st.session_state.setdefault('selected_category', "All Muscles")
-    st.session_state.setdefault('selected_timeframe', "Last 3 months")
-    st.session_state.setdefault('selected_exercise', None)
-
-
-def update_session_state(exercise):
-    if exercise != st.session_state.selected_exercise:
-        st.session_state.selected_exercise = exercise
-        st.rerun()
-        
-def load_css(file_name:str)->None:
-    with open(file_name) as f:
-        st.html(f'<style>{f.read()}</style>')
-

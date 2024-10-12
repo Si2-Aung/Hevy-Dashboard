@@ -34,4 +34,4 @@ def create_line_chart(data: pd.DataFrame, y_column: str, y_label: str, min_max_a
     )
 
     # Display the plot in Streamlit
-    st.plotly_chart(fig, use_container_width=False)
+    st.plotly_chart(fig, use_container_width=False, key='line_chart')

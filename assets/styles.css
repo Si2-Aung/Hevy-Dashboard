@@ -1,6 +1,5 @@
-/* Customized input fields for email, subject, and message */
 div[data-testid="stApp"] {
-    background: linear-gradient(to left, #ffffff, #ffffff);
+    background: linear-gradient(to left, #ffffff, #faf8f7);
 }
 
 .st-key-file_uploader section {
@@ -34,3 +33,13 @@ div[data-testid="stApp"] {
     border-color: grey;
 }
 
+.st-key-test_now button{
+    background-color: #008000; /* Green background for the submit button */
+    color: white; /* White text color */
+    cursor: pointer; /* Optional: Pointer cursor on hover */
+}
+
+.st-key-test_now button:hover {
+    background-color: #006400; /* Darker green on hover */
+    color: green;
+}

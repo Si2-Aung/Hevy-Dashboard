@@ -26,10 +26,14 @@ def display_how_to_upload():
     """)
 
 def display_test_this_app():
-    st.title("🎲Test this app?")
-    st.write("You can try the app with the random data, no upload needed 🎉")
-    test_now = st.toggle("Test now")
-    
+    st.title("You have no Data?")
+    st.write("No Problem! You can try the app with random generated data, no upload needed 🎉")
+
+    toggle = st.toggle("Show the random generated data", key="show_data")
+    if toggle:
+        st.dataframe(pd.read_csv("random_data.csv"))
+
+    test_now = st.button("Test now", key="test_now")
     if test_now and 'uploaded_data' not in st.session_state:
         st.session_state.uploaded_data = pd.read_csv("random_data.csv")
         st.rerun() 
