@@ -1,36 +1,48 @@
+/* Overall page background gradient */
 div[data-testid="stApp"] {
     background: linear-gradient(to left, #ffffff, #faf8f7);
+    padding: 20px; /* Added padding for a bit more spacing */
+    font-family: 'Inter', sans-serif; /* Clean and modern font */
 }
 
+/* File Uploader section styling */
 .st-key-file_uploader section {
-    border: 2px dashed #cccccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    padding: 20px;
+    border: 2px solid #e5e7eb; /* Softer neutral border */
+    border-radius: 12px; 
+    background-color: #f9fafb; /* Light background for a clean look */
+    padding: 24px;
     text-align: center;
-    color: #888;
-    font-weight: bold;
-    transition: border-color 0.3s ease-in-out;
-}
-
-.st-key-file_uploader section button {
-    border: 2px dashed #cccccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    text-align: center;
-    color: #888;
-    font-weight: bold;
-    transition: border-color 0.3s ease-in-out;
-}
-
-.st-key-file_uploader section button:hover{
-    border-color: red;
-    color: red
+    color: #4b5563; /* Muted text color for subtle contrast */
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
 .st-key-file_uploader section:hover {
-    border-color: grey;
+    border-color: #9ca3af; /* Light gray border for hover effect */
+    background-color: #f3f4f6; /* Slight background change on hover */
+    color: #1f2937; /* Darker text for better readability */
+}
+
+/* File Upload button */
+.st-key-file_uploader section button {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #f3f4f6; /* Softer gray for button */
+    padding: 12px 24px;
+    color: #4b5563;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Light shadow */
+}
+
+.st-key-file_uploader section button:hover {
+    border-color: #6366f1; /* Muted, elegant purple */
+    color: #6366f1;
+    background-color: #eef2ff; /* Soft light purple background */
 }
 
 .st-key-test_now button{

@@ -10,6 +10,7 @@ def main():
     if workout_data is None:    
         display_how_to_upload()
         display_test_this_app()
+        st.divider()
     else:
         ps.handle_page_selection(workout_data)
     
@@ -20,7 +21,7 @@ def display_how_to_upload():
                 
     **2.** Navigate to **Settings** and select **'Export Data'** to download your CSV file 📥
                 
-    **3.** **Upload your CSV file** here 📤
+    **3.** Drag and drop the file to the Uploader above 📤
                 
     **4.** **Enjoy the app** 🎉
     """)

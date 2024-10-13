@@ -20,7 +20,7 @@ def filter_data_by_limitation_value(workout_data, limitation_value):
     
 def get_limitation_value(max_months_available):
     limitation_value = st.slider(
-        label="Amount of months to take into account, 0 = all!",
+        label="Number of past months to consider, with 0 meaning all months",
         min_value=0,
         max_value=min(12, max_months_available),
         value=0,  # Standardwert
