@@ -1,9 +1,3 @@
-/* Overall page background gradient */
-div[data-testid="stApp"] {
-    background: linear-gradient(to left, #ffffff, #faf8f7);
-    padding: 20px; /* Added padding for a bit more spacing */
-    font-family: 'Inter', sans-serif; /* Clean and modern font */
-}
 
 /* File Uploader section styling */
 .st-key-file_uploader section {

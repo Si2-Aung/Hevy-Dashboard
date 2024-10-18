@@ -11,6 +11,7 @@ def render_email_form():
         subject = st.text_input("Subject", value="", placeholder="Enter the email subject", max_chars=100, key="subject")
         message = st.text_area("Message", value="", placeholder="Enter your message", max_chars=777, key="message")
         submit_button = st.form_submit_button(label="💌 Send Email")
+        
         return submit_button, sender_email, subject, message
 
 # Function to validate the form
